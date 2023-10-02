@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oraimo Nigeria Unofficial Online Store</title>
+    <link rel="stylesheet" href="/public/css/index1.css">
+    <link rel="stylesheet" href="/public/css/index2.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    <div id="profile-page">
+        <h1>Welcome <%= foundCustomer.firstname %>!</h1>
+        <p>Click <a href="/logout">here </a>to logout</p>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+<script src="/public/javascript/profile.js"></script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login</title>
+    <link rel="stylesheet" href="/public/css/index1.css">
+    <link rel="stylesheet" href="/public/css/index2.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <div id="customerlogin"><h2>Customer Login</h2></div>
+    <div id="customerlogin-grid">
+        <div>
+            <h2>Registered Customers</h2>
+            <p>If you have an account, sign in with your email address.</p>
+            <form action="/login" method="post">
+                <div class="input-div">
+                    <h4>Email <span style="color: #e52b2e;">*</span></h4>
+                    <input id="email-value" type="text" name="email">
+                </div>
+                <div class="input-div">
+                    <h4>Password <span style="color: #e52b2e;">*</span></h4>
+                    <input id="password-value" type="password" name="password">
+                </div>
+                <span id="after-forget">You have entered wrong details</span>
+                <p>Forgot your Password?</p>
+                <div id="sign-in">
+                    <button type="submit" class="customer-button">Sign In</button>
+                    <p><%= alert %></p>
+                </div>
+                <span id="required">* Required Fields</span>
+            </form>
+        </div>
+        <div>
+            <h2>New Customers</h2>
+            <p>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</p>
+            <div id="create-account"><a href="/createaccount"><button class="customer-button">Create an Account</button></a></div>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+<script src="/public/javascript/customerlogin.js"></script>
+</html>

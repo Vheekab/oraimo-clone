@@ -1,0 +1,415 @@
+@media (max-width: 1167px) {
+    #nav-span {
+        gap: 10px;
+    }
+
+    #footer {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 1078px) {
+    nav {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .parent-grid-sub h1 {
+        font-size: 230%;
+    }
+}
+
+@media (max-width: 1043px) {
+    nav {
+        padding-left: 1px;
+        padding-right: 1px;
+        grid-template-columns: 162px max-content max-content;
+        gap: 7px;
+    }
+
+    #nav-span {
+        padding-top: 30px;
+        gap: 3px;
+    }
+
+    #logo1 {
+        width: 80%;
+    }
+
+    #nav-right {
+        gap: 2px;
+    }
+
+    #search-oraimo {
+        margin-top: 18px;
+    }
+
+    .icons {
+        padding-top: 20px;
+    }
+
+    #arrivals-grid, #products-grid {
+        gap: 10px;
+    }
+
+    #arrivals-image, #products-image {
+        width: 80%;
+    }
+
+    #footer {
+        gap: 10px;
+    }
+
+    #phone {
+        margin-left: 5px;
+    }
+}
+
+@media (max-width: 931px) {
+    #phone {
+        display: block;
+    }
+
+    #input-email {
+        width: 82%;
+    }
+
+    .title {
+        font-size: 90%;
+    }
+
+    .price {
+        font-size: 90%;
+    }
+
+    .rating {
+        font-size: 90%;
+    }
+
+    .reviews {
+        font-size: 90%;
+        margin-left: 8px;
+    }
+}
+
+@media (max-width: 914px) {
+    nav {
+        grid-template-columns: 130px max-content max-content;
+    }
+
+    #nav-span {
+        padding-top: 20px;
+        gap: 3px;
+    }
+
+    #search-oraimo {
+        margin-top: 8px;
+    }
+
+    .icons {
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 880px) {
+    nav {
+        grid-template-columns: 105px max-content max-content;
+    }
+
+    #nav-span {
+        padding-top: 13px;
+        gap: 3px;
+    }
+
+    #nav-right {
+        gap: 2px;
+    }
+
+    #search-oraimo {
+        margin-top: 8px;
+        padding: 5px;
+        background-image: none;
+    }
+
+    .icons {
+        padding-top: 8px;
+    }
+
+    #parent-grid {
+        margin-top: 30px;
+        gap: 10px;
+    }
+
+    #products-grid {
+        gap: 20px;
+    }
+
+    #arrivals-grid {
+        grid-template-columns: repeat(3, auto);
+        gap: 20px;
+    }
+
+    #arrivals-image, #products-image {
+        width: 70%;
+    }
+}
+
+@media (max-width: 850px) {
+    nav {
+        grid-template-columns: 85px max-content max-content;
+    }
+
+    .parent-grid-sub h1 {
+        font-size: 200%;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 832px) {
+    #nav-span h4 {
+        font-size: 80%;
+    }
+
+    #nav-sub {
+        gap: 80px;
+    }
+}
+
+@media (max-width: 793px) {
+    #input-email {
+        width: 74%;
+    }
+
+    #phone {
+        display: inline;
+    }
+
+    #parent-grid {
+        margin-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 779px) {
+    header h4 {
+        font-size: 75%;
+    }
+
+    #nav-span h4 {
+        font-size: 75%;
+    }
+}
+
+
+@media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+
+    #nav2 {
+        display: flex;
+        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #nav2-right {
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        gap: 5px;
+    }
+
+    #menu {
+        width: 60%;
+        padding-top: 6px;
+    }
+
+    #menu:hover {
+        cursor: pointer;
+    }
+
+    #logo-sub {
+        width: 30%;
+        padding-left: 120px;
+    }
+
+    #hidden-menu div {
+        display: grid;
+        grid-template-rows: auto;
+        gap: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 40px;
+    }
+
+    #hidden-menu div p {
+        font-size: 110%;
+        font-weight: bold;
+    }
+
+    #hidden-menu-home {
+        color: #4ad295;
+    }
+
+    #arrivals-grid {
+        grid-template-columns: repeat(2, auto);
+        gap: 20px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    #arrivals-image, #products-image {
+        width: 70%;
+    }
+
+    #footer {
+        display: none;
+    }
+
+    #footer2 {
+        margin-top: 60px;
+        display: grid;
+        grid-template-rows: repeat(4, auto);
+        gap: 40px;
+        background-color: #323232;
+        padding-top: 30px;
+        padding-bottom: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: white;
+    }
+
+    .footer2-sub {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #817e7e;
+        padding-bottom: 15px;
+    }
+
+    .footer2-sub p {
+        padding-top: 10px;
+        font-size: 120%;
+    }
+
+    #footer-dropdown1, #footer-dropdown2, #footer-dropdown3, #footer-dropdown4 {
+        display: none;
+    }
+
+    #footer-dropdown1 div, #footer-dropdown2 div, #footer-dropdown3 div, #footer-dropdown4 div {
+        display: grid;
+        grid-template-rows: auto;
+        gap: 15px;
+        color: #817e7e;
+        font-size: 110%;
+    }
+
+    #logo2 {
+        width: 20%;
+    }
+
+
+    #customerlogin-grid {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .input-div input {
+        width: 95%;
+    }
+
+    .customer-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 670px) {
+    header h4 {
+        font-size: 65%;
+    }
+    
+    #nav-sub {
+        gap: 40px;
+    }
+
+    .parent-grid-sub h1 {
+        font-size: 180%;
+    }
+
+    .product-arrival {
+        margin-top: 15px;
+    }
+
+    #products-grid {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 590px) {
+    header h4 {
+        font-size: 58%;
+    }
+
+    #nav-sub {
+        gap: 20px;
+    }
+
+    #products-grid {
+        gap: 10px;
+    }
+
+    #arrivals-grid {
+        gap: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 543px) {
+    header h4 {
+        font-size: 50%;
+    }
+    
+    #nav-sub {
+        gap: 10px;
+    }
+
+    #nav-sub p {
+        font-size: 80%;
+    }
+
+    .parent-grid-sub h1 {
+        font-size: 150%;
+        padding-left: 5px;
+        padding-top: 5px;
+    }
+}
+
+@media (max-width: 443px) {
+    header h4 {
+        font-size: 48%;
+    }
+    
+    #nav-sub {
+        gap: 3px;
+    }
+
+    #nav-sub p {
+        font-size: 60%;
+    }
+
+    #parent-grid {
+        margin-top: 12px;
+        gap: 5px;
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .parent-grid-sub h1 {
+        font-size: 120%;
+    }
+}

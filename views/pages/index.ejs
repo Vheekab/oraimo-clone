@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oraimo Nigeria Unofficial Online Store</title>
+    <link rel="stylesheet" href="/public/css/index1.css">
+    <link rel="stylesheet" href="/public/css/index2.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <div id="slideshow-div">
+        <div><img class="slideshow" src="./slideshow/1880-747.jpg_1.jpeg"></div>
+        <div><img class="slideshow" src="./slideshow/20220622-195048.jpeg"></div>
+        <div><img class="slideshow" src="./slideshow/_-_-1880_747_1.jpg"></div>
+        <div><img class="slideshow" src="./slideshow/_-banner.jpg_1.jpeg"></div>
+        <div><img class="slideshow" src="./slideshow/banner_for_homepage_sum.jpg"></div>
+        <div><img class="slideshow" src="./slideshow/oraimo_o_club.jpg"></div>
+        <div><img class="slideshow" src="./slideshow/solar_generator.jpg"></div>
+    </div>
+    <div id="parent-grid">
+        <div class="parent-grid-sub">
+            <h1>Audio</h1>
+            <img src="https://media.ng.oraimo.com/wysiwyg/TWS.jpg">
+        </div>
+        <div class="parent-grid-sub">
+            <h1>Lifestyle</h1>
+            <img src="https://media.ng.oraimo.com/wysiwyg/cms/20221201-164124.jpg">
+        </div>
+        <div class="parent-grid-sub">
+            <h1>Power</h1>
+            <img src="https://media.ng.oraimo.com/wysiwyg/cms/banner_-9.20-01.jpg">
+        </div>
+        <div class="parent-grid-sub">
+            <h1>Wearable</h1>
+            <img src="https://media.ng.oraimo.com/wysiwyg/cms/_-32N.jpg.jpeg">
+        </div>
+    </div>
+    <div class="product-arrival">
+        <h2>Product Display</h2>
+        <p>Up to 50% off!</p>
+    </div>
+    <div id="products-grid-parent">
+        <div id="left" class="arrow-icon"><img src="./images/icons8-arrowhead-30.png"></div>
+        <div id="products-grid">
+            <% foundProduct.forEach(element => { %>
+             <div>
+                <div>
+                    <a href=/shop/<%= element._id %>><img src=<%= element.image %>></a>
+                </div>
+                <div>
+                    <a href=/shop/<%= element._id %>><h3 class="title"><%= element.title.substring(0, 70) + "..." %></h3></a>
+                    <p class="rating"><%= element.rating %> rating <span class="reviews"><%= element.review %> reviews</span></p>
+                    <h3 class="price">₦<%= element.price %></h3>
+                </div>
+             </div>
+            <% }) %>
+        </div>
+        <div id="right" class="arrow-icon"><img src="./images/icons8-arrowhead-30 (1).png"></div>
+    </div>
+    <div class="product-arrival">
+        <h2>New Arrival</h2>
+        <p>All new arrival products and trends here!</p>
+    </div>
+    <div id="arrivals-grid">
+        <% foundArrival.forEach(element => { %>
+         <div>
+            <div>
+                <a href=/shop/<%= element._id %>><img src=<%= element.image %>></a>
+            </div>
+            <div>
+                <a href=/shop/<%= element._id %>><h3 class="title"><%= element.title.substring(0, 64) + "..." %></h3></a>
+                <p class="rating"><%= element.rating %> rating <span class="reviews"><%= element.review %> reviews</span></p>
+                <h3 class="price">₦<%= element.price %></h3>
+            </div>
+         </div>
+        <% }) %>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+<script src="/public/javascript/script.js"></script>
+</html>

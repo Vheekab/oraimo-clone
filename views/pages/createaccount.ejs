@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Customer Account</title>
+    <link rel="stylesheet" href="/public/css/index1.css">
+    <link rel="stylesheet" href="/public/css/index2.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <div id="createcontainer">
+        <h2 id="createcontainerh2">Create New Customer Account</h2>
+        <form action="/register" method="post">
+            <div class="createcontainer-form">
+                <h2>Personal Information</h2>
+                <div>
+                    <h4>First Name <span style="color: #e52b2e;">*</span></h4>
+                    <input type="text" name="firstname">
+                </div>
+                <div>
+                    <h4>Last Name <span style="color: #e52b2e;">*</span></h4>
+                    <input type="text" name="lastname">
+                </div>
+                <div class="createcontainer-checkbox">
+                    <input type="checkbox" name="newsletter">
+                    <p>Sign Up for Newsletter</p>
+                </div>
+                <div class="createcontainer-checkbox">
+                    <input type="checkbox" name="assistance">
+                    <p>Allow remote shopping assistance</p>
+                </div>
+                <div class="createcontainer-checkbox">
+                    <a href="/createadmin"><p>Admin?</p></a>
+                </div>
+            </div>
+            <div class="createcontainer-form">
+                <h2>Sign-In Information</h2>
+                <div>
+                    <h4>Email <span style="color: #e52b2e;">*</span></h4>
+                    <input type="email" name="email">
+                </div>
+                <div>
+                    <h4>Password <span style="color: #e52b2e;">*</span></h4>
+                    <input type="password" name="password">
+                </div>
+                <div>
+                    <h4>Confirm Password <span style="color: #e52b2e;">*</span></h4>
+                    <input type="password" name="confirmPassword">
+                </div>
+            </div>
+            <div><button type="submit">Create an Account</button></div>
+        </form>
+        <p><%= alert %></p>
+        <a href="/profile"><p>Back</p></a>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+<script src="/public/javascript/createaccount.js"></script>
+</html>

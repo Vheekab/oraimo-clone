@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Customer Account</title>
+    <link rel="stylesheet" href="/public/css/index1.css">
+    <link rel="stylesheet" href="/public/css/index2.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <div id="createcontainer">
+        <h2 id="createcontainerh2">Create New Admin Account</h2>
+        <form action="/createadmin" method="post">
+            <div class="createcontainer-form">
+                <h2>Admin Information</h2>
+                <div>
+                    <h4>Full Name <span style="color: #e52b2e;">*</span></h4>
+                    <input type="text" name="fullname">
+                </div>
+                <div>
+                    <h4>Username <span style="color: #e52b2e;">*</span></h4>
+                    <input type="text" name="username">
+                </div>
+                <div>
+                    <h4>Password <span style="color: #e52b2e;">*</span></h4>
+                    <input type="password" name="password">
+                </div>
+                <div>
+                    <h4>Confirm Password <span style="color: #e52b2e;">*</span></h4>
+                    <input type="password" name="confirmPassword">
+                </div>
+                <div class="createcontainer-checkbox">
+                    <input type="checkbox" name="newsletter">
+                    <p>Admin</p>
+                </div>
+                <div class="createcontainer-checkbox">
+                    <input type="checkbox" name="assistance">
+                    <p>Allow remote shopping assistance</p>
+                </div>
+            </div>
+            <div><button type="submit">Create an Account</button></div>
+        </form>
+        <p><%= alert %></p>
+        <a href="/profile"><p>Back</p></a>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+<script src="/public/javascript/createadmin.js"></script>
+</html>
