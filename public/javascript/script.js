@@ -86,7 +86,7 @@ function hamburgerMenu() {
 
 
 const swipeProductsGrid = document.querySelector("#products-grid");
-const firstImg = swipeProductsGrid.querySelectorAll(".products-arrivals-child")[0];
+const firstImg = swipeProductsGrid.querySelectorAll(".products-grid-element")[0];
 const arrowIcon = document.querySelectorAll(".arrow-icon");
 
 

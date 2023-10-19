@@ -18,6 +18,9 @@ const mongodbStore = new mongodbsession({
     collection: 'usersession'
 })
 
+let cart = []
+let orders = []
+
 app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.static('./'))
@@ -39,6 +42,14 @@ const userAuthentication = (req, res, next) => {
     }
 }
 
+const adminAuthentication = (req, res, next) => {
+    if (req.session.adminAuthentication) {
+        next()
+    } else {
+        res.redirect('/customerlogin')
+    }
+}
+
 app.get('/', async (req, res) => {
     const foundProduct = await Product.find({})
     const foundArrival = await Arrival.find({})
@@ -50,12 +61,15 @@ app.get('/shop/:id', async (req, res) => {
     const productDetails = await Product.findOne({_id:id}).exec()
     const arrivalDetails = await Arrival.findOne({_id:id}).exec()
 
-    res.render('pages/shop', {productData: productDetails, arrivalData: arrivalDetails})
+    res.render('pages/shop', {productData: productDetails, arrivalData: arrivalDetails, alert: req.flash('info')})
 })
 
 app.get('/customerlogin', async (req, res) => {
     if (req.session.userAuthentication) {
         res.redirect('/profile')
+
+    } else if (req.session.adminAuthentication) {
+        res.redirect('/dashboard')
 
     } else {
         res.render('pages/customerlogin', {alert: req.flash('info')})
@@ -65,6 +79,21 @@ app.get('/customerlogin', async (req, res) => {
 app.get('/profile', userAuthentication, async (req, res) => {
     const foundCustomer = await Customer.findOne({})
     res.render('pages/profile', {foundCustomer})
+})
+
+app.get('/cart', (req, res) => {
+    res.render('pages/cart', {cart})
+})
+
+app.get('/checkout', (req, res) => {
+    const cartTotal = cart.map(obj => parseInt(obj.productTotal)).reduce((acc, currentValue) => acc + currentValue, 0)
+    const shippingValue = 2000
+    const orderTotal = parseInt(cartTotal) + parseInt(shippingValue)
+    res.render('pages/checkout', {cart, cartTotal, shippingValue, orderTotal})
+})
+
+app.get('/ordercomplete', (req, res) => {
+    res.render('pages/ordercomplete')
 })
 
 app.get('/logout', (req, res) => {
@@ -80,16 +109,24 @@ app.get('/createadmin', (req, res) => {
     res.render('pages/createadmin', {alert: req.flash('info')})
 })
 
-app.get('/dashboard', userAuthentication, (req, res) => {
-    res.render('pages/dashboard')
+app.get('/dashboard', adminAuthentication, async (req, res) => {
+    const foundAdmin = await Admin.findOne({})
+    res.render('pages/dashboard', {foundAdmin})
 })
 
 app.get('/sendproducts', (req, res) => {
-    res.render('pages/sendproducts')
+    res.render('pages/sendproducts', {alert: req.flash('info')})
 })
 
 app.get('/sendarrivals', (req, res) => {
-    res.render('pages/sendarrivals')
+    res.render('pages/sendarrivals', {alert: req.flash('info')})
+})
+
+app.get('/placedorders', (req, res) => {
+    const cartTotal = cart.map(obj => parseInt(obj.productTotal)).reduce((acc, currentValue) => acc + currentValue, 0)
+    const shippingValue = 2000
+    const orderTotal = parseInt(cartTotal) + parseInt(shippingValue)
+    res.render('pages/placedorders', {orders, orderTotal})
 })
 
 let foundCustomer
@@ -115,7 +152,7 @@ app.post('/login', async (req, res) => {
             const checkPassword = await bcrypt.compare(password, foundAdmin.password)
             
             if (checkPassword) {
-                req.session.userAuthentication = true;
+                req.session.adminAuthentication = true;
                 res.redirect('/dashboard')
             } else {
                 req.flash('info', 'Username or Password is incorrect')
@@ -127,16 +164,6 @@ app.post('/login', async (req, res) => {
         }
     }
 })
-
-// app.get('/profile', userAuthentication, (req, res) => {
-
-//     if (req.session.userAuthentication) {
-//         res.render('pages/profile', {foundCustomer})
-
-//     } else {
-//         res.render('pages/customerlogin', {alert: req.flash('info')})
-//     }
-// })
 
 app.post('/register', async (req, res) => {
     const {firstname, lastname, email, password} = req.body
@@ -227,6 +254,63 @@ app.post('/sendarrivals', async (req, res) => {
     await details.save()
     req.flash('info', 'This product was sent!')
     res.redirect('/sendarrivals')
+})
+
+app.post('/addtocart', (req, res) => {
+    const {productId, productImage, productName, productPrice, productQuantity, productTotal} = req.body
+
+    const existingItemIndex = cart.findIndex(item => item.productId === productId)
+
+    if (existingItemIndex !== -1) {
+        cart[existingItemIndex].productQuantity = parseInt(cart[existingItemIndex].productQuantity) + 1;
+        cart[existingItemIndex].productTotal = productPrice * parseInt(cart[existingItemIndex].productQuantity)
+
+    } else {
+        const item = {
+            productId, 
+            productImage, 
+            productName, 
+            productPrice, 
+            productQuantity, 
+            productTotal: productPrice
+        }
+        cart.push(item)
+    }
+
+    req.flash('info', `You added ${productName} to your <a href="/cart">shopping cart</a>`)
+    res.redirect('/shop/' + productId)
+})
+
+app.get('/removeitem', (req, res) => {
+    const removeProduct = req.query.productId
+    const newCart = cart.filter(element => element.productId !== removeProduct)
+
+    cart = newCart
+    res.redirect('/cart')
+})
+
+app.post('/sendorder', (req, res) => {
+    const {checkEmail, checkFirstname, checkAddress, checkCity, checkState, checkPhone} = req.body
+    const orderItem = {checkEmail, checkFirstname, checkAddress, checkCity, checkState, checkPhone}
+
+    const cartTotal = cart.map(obj => parseInt(obj.productTotal)).reduce((acc, currentValue) => acc + currentValue, 0)
+    const shippingValue = 2000
+    const orderTotal = parseInt(cartTotal) + parseInt(shippingValue)
+
+    let orderForEach = []
+    orderForEach.push(orderItem, ...cart, orderTotal)
+
+    orders.push(orderForEach)
+    res.redirect('/ordercomplete')
+})
+
+app.post('/clearorder', (req, res) => {
+    const index = req.body.index
+
+    if (index >= 0 && index < orders.length) {
+        orders.splice(index, 1)
+    }
+    res.redirect('/placedorders')
 })
 
 app.listen(PORT, () => {

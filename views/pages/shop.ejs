@@ -11,6 +11,8 @@
     <%- include('../partials/header.ejs') %>
 
     <div id="productdetails">
+        <p id="details-alert"><%- alert %></p>
+
         <% if (productData) { %>
             <h2 id="details-title"><%= productData.title %></h2>
         <% } else if (arrivalData) { %>
@@ -40,7 +42,24 @@
         </div>
 
         <div id="details-buttons">
-            <button id="details-add">Add to cart</button>
+            <form action="/addtocart" method="post">
+                <% if (productData) { %>
+                    <input type="hidden" name="productId" value="<%= productData._id %>">
+                    <input type="hidden" name="productImage" value="<%= productData.image %>">
+                    <input type="hidden" name="productName" value="<%= productData.title %>">
+                    <input type="hidden" name="productPrice" value="<%= productData.price %>">
+                    <input type="hidden" name="productQuantity" value="1">
+                    <input type="hidden" name="productTotal" value="">
+                <% }  else if (arrivalData) { %>
+                    <input type="hidden" name="productId" value="<%= arrivalData._id %>">
+                    <input type="hidden" name="productImage" value="<%= arrivalData.image %>">
+                    <input type="hidden" name="productName" value="<%= arrivalData.title %>">
+                    <input type="hidden" name="productPrice" value="<%= arrivalData.price %>">
+                    <input type="hidden" name="productQuantity" value="1">
+                    <input type="hidden" name="productTotal" value="">
+                <% } %>
+                <button id="details-add" type="submit">Add to cart</button>
+            </form>
             <button id="details-buy">Buy It Now</button>
         </div>
 

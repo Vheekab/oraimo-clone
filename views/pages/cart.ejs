@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/public/css/index1.css">
+    <link rel="stylesheet" href="/public/css/index2.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    <div id="cart-page">
+        <h1>Shopping Cart</h1>
+        <div id="cart-div">
+            <% if (cart.length === 0) { %>
+                <div id="cart-div0">
+                    <p>Your cart is empty</p>
+                    <p>Click <a href="/">here</a> to continue shopping</p>
+                </div>
+    
+            <% } else { %>
+                <div id="cart-head">
+                    <h4>Products</h4>
+                    <div class="cart-items2">
+                        <div>
+                            <h4>Price</h4>
+                            <h4>Quantity</h4>
+                            <h4>Total</h4>
+                        </div>
+                        <h4></h4>
+                    </div>
+                </div>
+                <% cart.forEach(element => { %>
+                 <div id="cart-items">
+                    <div class="cart-items1">
+                        <div><img src="<%= element.productImage %>"></div>
+                        <p><%= element.productName %></p>
+                    </div>
+                    <div class="cart-items2">
+                        <div>
+                            <p>₦<%= element.productPrice %></p>
+                            <p>Qty: <%= element.productQuantity %></p>
+                            <p class="price">₦<%= element.productTotal %></p>
+                        </div>
+                        <a href="/removeitem?productId=<%= element.productId %>"><button>X</button></a>
+                    </div>
+                 </div>
+                <% }) %>
+            <%  } %>
+        </div>
+
+        <div>
+            <% if (cart.length > 0) { %>
+                <div id="cart-shopping">
+                    <div><a href="/"><button>Continue Shopping</button></a></div>
+                    <div><a href="/cart"><button>Update Shopping Cart</button></a></div>
+                </div>
+                <div id="cart-proceed">
+                    <a href="/checkout"><button>Proceed to Checkout</button></a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+<script src="/public/javascript/cart.js"></script>
+</html>

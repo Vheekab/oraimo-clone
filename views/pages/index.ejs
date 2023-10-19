@@ -45,12 +45,12 @@
         <div id="left" class="arrow-icon"><img src="./images/icons8-arrowhead-30.png"></div>
         <div id="products-grid">
             <% foundProduct.forEach(element => { %>
-             <div>
+             <div class="products-grid-element">
                 <div>
                     <a href=/shop/<%= element._id %>><img src=<%= element.image %>></a>
                 </div>
                 <div>
-                    <a href=/shop/<%= element._id %>><h3 class="title"><%= element.title.substring(0, 70) + "..." %></h3></a>
+                    <a href=/shop/<%= element._id %>><h3 class="title"><%= element.title.substring(0, 60) + "..." %></h3></a>
                     <p class="rating"><%= element.rating %> rating <span class="reviews"><%= element.review %> reviews</span></p>
                     <h3 class="price">₦<%= element.price %></h3>
                 </div>

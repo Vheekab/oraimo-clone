@@ -11,10 +11,12 @@
 <body>
     <%- include('../partials/header.ejs') %>
     <div id="admindashboard">
-        <h1>Admin Dashboard</h1>
+        <h1>Admin Dashboard, (<%= foundAdmin.fullname %>)</h1>
         <div>
             <p>Send products display <a href="/sendproducts">here</a></p>
             <p>Send new arrivals <a href="/sendarrivals">here</a></p>
+            <p>View placed orders <a href="/placedorders">here</a></p>
+            <p>Click <a href="/logout">here </a> to log out</p>
         </div>
     </div>
     <%- include('../partials/footer.ejs') %>
