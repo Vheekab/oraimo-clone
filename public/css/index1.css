@@ -776,8 +776,11 @@ nav {
     display: grid;
     grid-template-columns: 350px auto;
     gap: 50px;
-    /* border-bottom: 1px solid #cbc2c2;
-    padding-bottom: 40px; */
+}
+
+#checkout-error {
+    font-size: 90%;
+    color: #e52b2e;
 }
 
 #checkout-section1 {

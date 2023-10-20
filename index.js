@@ -20,6 +20,7 @@ const mongodbStore = new mongodbsession({
 
 let cart = []
 let orders = []
+let orderPlaced = false
 
 app.set('view engine', 'ejs')
 app.use(express.json())
@@ -89,11 +90,22 @@ app.get('/checkout', (req, res) => {
     const cartTotal = cart.map(obj => parseInt(obj.productTotal)).reduce((acc, currentValue) => acc + currentValue, 0)
     const shippingValue = 2000
     const orderTotal = parseInt(cartTotal) + parseInt(shippingValue)
-    res.render('pages/checkout', {cart, cartTotal, shippingValue, orderTotal})
+
+    if (cart.length === 0) {
+        return res.redirect('/cart')
+    }
+
+    res.render('pages/checkout', {cart, cartTotal, shippingValue, orderTotal, alert: req.flash('info')})
 })
 
 app.get('/ordercomplete', (req, res) => {
-    res.render('pages/ordercomplete')
+    if (orderPlaced) {
+        orderPlaced = false
+        res.render('pages/ordercomplete')
+    } else {
+        const previousPage = req.headers.referer || '/'
+        res.redirect(previousPage);
+    }
 })
 
 app.get('/logout', (req, res) => {
@@ -291,6 +303,12 @@ app.get('/removeitem', (req, res) => {
 
 app.post('/sendorder', (req, res) => {
     const {checkEmail, checkFirstname, checkAddress, checkCity, checkState, checkPhone} = req.body
+
+    if (!checkEmail || !checkFirstname || !checkAddress || !checkCity || !checkState || !checkPhone) {
+        req.flash('info', 'Check required fields')
+        return res.redirect('/checkout')
+    }
+
     const orderItem = {checkEmail, checkFirstname, checkAddress, checkCity, checkState, checkPhone}
 
     const cartTotal = cart.map(obj => parseInt(obj.productTotal)).reduce((acc, currentValue) => acc + currentValue, 0)
@@ -301,6 +319,7 @@ app.post('/sendorder', (req, res) => {
     orderForEach.push(orderItem, ...cart, orderTotal)
 
     orders.push(orderForEach)
+    orderPlaced = true
     res.redirect('/ordercomplete')
 })
 
